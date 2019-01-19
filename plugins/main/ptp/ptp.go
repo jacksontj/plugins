@@ -129,6 +129,13 @@ func setupContainerVeth(netns ns.NetNS, ifName string, mtu int, pr *current.Resu
 					Gw:    ipc.Gateway,
 					Src:   ipc.Address.IP,
 				},
+				netlink.Route{
+					LinkIndex: contVeth.Index,
+					Dst: nil,
+					Scope: netlink.SCOPE_UNIVERSE,
+					Gw:    ipc.Gateway,
+					Src:   ipc.Address.IP,
+				},
 			} {
 				if err := netlink.RouteAdd(&r); err != nil {
 					return fmt.Errorf("failed to add route %v: %v", r, err)
