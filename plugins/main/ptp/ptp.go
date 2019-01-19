@@ -121,16 +121,6 @@ func setupContainerVeth(netns ns.NetNS, ifName string, mtu int, pr *current.Resu
 				},
 				netlink.Route{
 					LinkIndex: contVeth.Index,
-					Dst: &net.IPNet{
-						IP:   ipc.Address.IP.Mask(ipc.Address.Mask),
-						Mask: ipc.Address.Mask,
-					},
-					Scope: netlink.SCOPE_UNIVERSE,
-					Gw:    ipc.Gateway,
-					Src:   ipc.Address.IP,
-				},
-				netlink.Route{
-					LinkIndex: contVeth.Index,
 					Dst: nil,
 					Scope: netlink.SCOPE_UNIVERSE,
 					Gw:    ipc.Gateway,
